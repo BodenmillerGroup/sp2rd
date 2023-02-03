@@ -1,0 +1,23 @@
+Package: sp2rd
+Version: 0.1.0
+Title: TODO
+Description: 
+    TODO
+Authors@R: 
+    c(person("Nils", "Eling", role = c("aut", "cre"), 
+      email = "nils.eling@dqbm.uzh.ch",
+      comment = c(ORCID = "0000-0002-4711-1176"))
+License: MIT
+Imports:
+    tweenr
+    gganimate
+Suggests:
+    knitr,
+    rmarkdown,
+    markdown,
+    testthat
+VignetteBuilder: knitr
+URL: https://github.com/BodenmillerGroup/sp2rd
+BugReports: https://github.com/BodenmillerGroup/sp2rd/issues
+RoxygenNote: 7.2.3
+Encoding: UTF-8
