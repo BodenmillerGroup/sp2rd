@@ -1,8 +1,22 @@
+---
+output: github_document
+---
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  gganimate = list(
+    nframes = 50
+  )
+)
+```
 
 # sp2rd
 
-A simple R package to generate animated transitions between spatial
-locations and reduced dimensional embeddings.
+A simple R package to generate animated transitions between spatial locations
+and reduced dimensional embeddings.
 
 **This package is currently under development.**
 
@@ -10,19 +24,19 @@ locations and reduced dimensional embeddings.
 
 To install the development version:
 
-``` r
+```{r, eval = FALSE}
 library(remotes)
 install_github("BodenmillerGroup/sp2rd")
 ```
 
 ## Usage
 
-The `sp2rd` function takes a `SingleCellExperiment` or
-`SpatialExperiment` object as input. You will need to specify under
-which name the spatial coordinates are stored and which low dimensional
-embeding to project them to:
+The `sp2rd` function takes a `SingleCellExperiment` or `SpatialExperiment`
+object as input. You will need to specify under which name the spatial 
+coordinates are stored and which low dimensional embeding to project them
+to:
 
-``` r
+```{r, message=FALSE}
 options(timeout = 100000)
 library(sp2rd)
 
@@ -37,8 +51,6 @@ sp2rd(cur_spe,
       img_id = "sample_id", 
       dimred = "UMAP")
 ```
-
-![](man/figures/README-unnamed-chunk-3-1.gif)<!-- -->
 
 The animation can be saved using `anim_save("path/to/gif_name.gif")`.
 

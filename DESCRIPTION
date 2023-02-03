@@ -6,11 +6,19 @@ Description:
 Authors@R: 
     c(person("Nils", "Eling", role = c("aut", "cre"), 
       email = "nils.eling@dqbm.uzh.ch",
-      comment = c(ORCID = "0000-0002-4711-1176"))
+      comment = c(ORCID = "0000-0002-4711-1176")))
 License: MIT
 Imports:
-    tweenr
-    gganimate
+    tweenr,
+    gganimate,
+    SpatialExperiment,
+    SingleCellExperiment,
+    SummarizedExperiment,
+    dplyr,
+    ggplot2,
+    magrittr,
+    methods,
+    scales 
 Suggests:
     knitr,
     rmarkdown,

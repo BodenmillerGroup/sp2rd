@@ -2,9 +2,14 @@
 #'
 #' TODO
 #'
-#' @param object a \code{SingleCellExperiment} or \code{SpatialExperiment} object
+#' @param object a \code{SingleCellExperiment} or \code{SpatialExperiment} object.
+#' @param coords the name of the x and y coordinates
+#' @param color_by how to color the points
+#' @param img_id the name of the image ID entry
+#' @param dimred which dimensional reduction to use
+#' @param margin padding between individual images
 #'
-#' @return TODO
+#' @return a ggplot object
 #'
 #' @examples
 #' # TODO
@@ -12,14 +17,19 @@
 #' @author Nils Eling (\email{nils.eling@@dqbm.uzh.ch})
 #'
 #' @importFrom tweenr tween_states
-#' @importFrom gganimate transition_states
+#' @importFrom gganimate transition_states enter_fade exit_shrink ease_aes
+#' @importFrom SingleCellExperiment reducedDim
+#' @importFrom scales rescale
+#' @importFrom ggplot2 ggplot aes geom_point theme_void
+#' @importFrom SingleCellExperiment reducedDim
+#'
 #' @export
-spatial2dimred <- function(object,
-                           coords = c("Pos_X", "Pos_Y"),
-                           color_by = NULL,
-                           img_id = "sample_id",
-                           dimred = "UMAP",
-                           margin = 100){
+sp2rd <- function(object,
+                  coords = c("Pos_X", "Pos_Y"),
+                  color_by = NULL,
+                  img_id = "sample_id",
+                  dimred = "UMAP",
+                  margin = 100){
     
     # Get coordinates
     spatial_df <- .get_spatial(object, coords, img_id, margin)
@@ -50,10 +60,12 @@ spatial2dimred <- function(object,
                                    ease = "cubic-in-out",
                                    nframes = 96)
     
-    ggplot(tweened_states, aes(x, y, color = .data[[color_by]])) + 
+    .data <- NULL
+    
+    ggplot(tweened_states, aes(.data$x, .data$y, color = .data[[color_by]])) + 
         geom_point() + 
         transition_states(
-            .frame,
+            .data$.frame,
             transition_length = 2,
             state_length = 1
         ) +

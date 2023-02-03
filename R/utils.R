@@ -1,3 +1,8 @@
+#' @importFrom methods is
+#' @importFrom SpatialExperiment spatialCoords
+#' @importFrom SummarizedExperiment colData
+#' @importFrom magrittr %>%
+#' @importFrom dplyr group_by summarize sym ungroup
 .get_spatial <- function(object, coords, img_id, margin){
     
     if (is(object, "SpatialExperiment")) {
@@ -15,13 +20,16 @@
         nr <- ceiling(ni/nc) 
         
         spatial_df$img_id <- colData(object)[[img_id]]
+        
+        .data <- NULL
+        
         max_measures <- spatial_df %>%
             group_by(img_id) %>%
             summarize(width = max(!!sym(coords[1])) - min(!!sym(coords[1])),
                       height = max(!!sym(coords[2])) - min(!!sym(coords[2]))) %>%
             ungroup() %>%
-            summarize(max_width = max(width),
-                      max_height = max(height))
+            summarize(max_width = max(.data$width),
+                      max_height = max(.data$height))
         
         max_width <- max_measures$max_width + margin
         max_height <- max_measures$max_height + margin
