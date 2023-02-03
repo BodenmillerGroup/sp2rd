@@ -32,7 +32,7 @@
         
         spatial_df <- merge(spatial_df, image_mapping, by = "img_id", sort = FALSE)
         spatial_df[,coords[1]] <- spatial_df[,coords[1]] + max_width * spatial_df$nx
-        spatial_df[,coords[2]] <- spatial_df[,coords[2]] + max_height * spatial_df$nx
+        spatial_df[,coords[2]] <- spatial_df[,coords[2]] + max_height * spatial_df$ny
     }
     
     return(spatial_df)
